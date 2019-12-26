@@ -14,7 +14,7 @@ namespace freeEnergyResortAPI.Controllers
     {
 
         [HttpGet]
-        public List<Ambiente> getAllAmbientes()
+        public ActionResult getAllAmbientes()
         {
             List<Ambiente> listAmbientes = new List<Ambiente>();
 
@@ -42,8 +42,8 @@ namespace freeEnergyResortAPI.Controllers
             listAmbientes.Add(a1);
             listAmbientes.Add(a2);
             listAmbientes.Add(a3);
-
-            return listAmbientes;
+            
+            return new OkObjectResult(listAmbientes);
         }
     }
 }
