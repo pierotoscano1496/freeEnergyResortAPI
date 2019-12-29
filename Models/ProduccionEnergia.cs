@@ -12,7 +12,7 @@ namespace freeEnergyResortAPI.Models
         public int IdTableroDistribucion { get; set; }
         public TableroDistribucion TableroDistribucion { get; set; }
         public DateTime Fecha { get; set; }
-        public decimal TotalEnergia { get; set; }
+        public decimal TotalProduccion { get; set; }
         public decimal EnergiaGanada { get; set; }
     }
 }

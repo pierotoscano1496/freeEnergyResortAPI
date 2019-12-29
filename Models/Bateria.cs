@@ -8,5 +8,7 @@ namespace freeEnergyResortAPI.Models
         public decimal Voltaje { get; set; }
         public decimal VoltajeMin { get; set; }
         public decimal VoltajeMax { get; set; }
+        public decimal Capacidad { get; set; }
+        public int TasaDescarga { get; set; }
     }
 }
