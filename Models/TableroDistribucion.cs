@@ -10,6 +10,5 @@ namespace freeEnergyResortAPI.Models
         public decimal Capacidad { get; set; }
         public string Marca { get; set; }
         public decimal VoltajeOperacion { get; set; }
-        public List<Ambiente> ListAmbiente { get; set; }
     }
 }

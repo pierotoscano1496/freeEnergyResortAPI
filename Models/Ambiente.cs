@@ -14,6 +14,5 @@ namespace freeEnergyResortAPI.Models
         public int IdTableroDistribucion { get; set; }
         public TableroDistribucion TableroDistribucion { get; set; }
         public string Nombre { get; set; }
-        public List<Accesorio> ListAccesorios { get; set; }
     }
 }
