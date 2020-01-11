@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using freeEnergyResortAPI.Models;
+using freeEnergyResortAPI.Context;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace freeEnergyResortAPI.Controllers
 {
@@ -12,38 +15,29 @@ namespace freeEnergyResortAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class AmbienteController
     {
+        private AmbienteContext objContext;
+        private readonly IConfigurationRoot _configuration;
+
+        public AmbienteController(IConfigurationRoot configuration)
+        {
+            this._configuration = configuration;
+            string mysqlConnStr = _configuration.GetConnectionString("DefaultConnection");
+            objContext = new AmbienteContext(mysqlConnStr);
+        }
 
         [HttpGet]
-        public ActionResult getAllAmbientes()
+        public ActionResult GetAllAmbientes()
         {
-            List<Ambiente> listAmbientes = new List<Ambiente>();
 
-            Ambiente a1 = new Ambiente
+            try
             {
-                IdAmbiente = 1,
-                CodAmbiente = "abc123",
-                Nombre = "Hotel"
-            };
-
-            Ambiente a2 = new Ambiente
+                List<Ambiente> listAmbientes = objContext.GetAllAmbientes();
+                return new OkObjectResult(listAmbientes);
+            }
+            catch
             {
-                IdAmbiente = 2,
-                CodAmbiente = "abc456",
-                Nombre = "Restaurante"
-            };
-
-            Ambiente a3 = new Ambiente
-            {
-                IdAmbiente = 3,
-                CodAmbiente = "xyz321",
-                Nombre = "Bar el trufo"
-            };
-
-            listAmbientes.Add(a1);
-            listAmbientes.Add(a2);
-            listAmbientes.Add(a3);
-            
-            return new OkObjectResult(listAmbientes);
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
