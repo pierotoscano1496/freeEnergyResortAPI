@@ -7,10 +7,10 @@ namespace freeEnergyResortAPI.Models
     {
         public int IdAmbiente { get; set; }
         public string CodAmbiente { get; set; }
-        public int IdUbicacion { get; set; }
-        public Ubicacion Ubicacion { get; set; }
-        public int IdTipoAmbiente { get; set; }
-        public TipoAmbiente TipoAmbiente { get; set; }
         public string Nombre { get; set; }
+        public int IdSectorConsumo { get; set; }
+        public SectorConsumo SectorConsumo { get; set; }
+        public List<Circuito> ListCircuitos { get; set; }
+        public List<ConsumoEnergia> ListConsumosEnergia { get; set; }
     }
 }

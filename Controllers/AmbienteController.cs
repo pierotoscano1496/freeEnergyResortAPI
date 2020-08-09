@@ -15,24 +15,50 @@ namespace freeEnergyResortAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class AmbienteController
     {
-        private AmbienteContext objContext;
-        private readonly IConfigurationRoot _configuration;
+        private AmbienteContext context;
+        private readonly IConfiguration _configuration;
 
-        public AmbienteController(IConfigurationRoot configuration)
+        public AmbienteController(IConfiguration configuration)
         {
             this._configuration = configuration;
-            string mysqlConnStr = _configuration.GetConnectionString("DefaultConnection");
-            objContext = new AmbienteContext(mysqlConnStr);
+            context = new AmbienteContext(configuration.GetConnectionString("DefaultConnection"));
         }
 
         [HttpGet]
         public ActionResult GetAllAmbientes()
         {
-
             try
             {
-                List<Ambiente> listAmbientes = objContext.GetAllAmbientes();
+                List<Ambiente> listAmbientes = context.GetAllAmbientes();
                 return new OkObjectResult(listAmbientes);
+            }
+            catch
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetAllAmbientesDetails()
+        {
+            try
+            {
+                List<Ambiente> listAmbientes = context.GetAllAmbientesDetails();
+                return new OkObjectResult(listAmbientes);
+            }
+            catch
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("{idAmbiente}")]
+        public ActionResult GetAmbiente(int idAmbiente)
+        {
+            try
+            {
+                Ambiente ambiente = context.GetAmbiente(idAmbiente);
+                return new OkObjectResult(ambiente);
             }
             catch
             {

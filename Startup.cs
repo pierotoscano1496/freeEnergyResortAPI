@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace freeEnergyResortAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", configurePolicy => configurePolicy.WithOrigins("http://localhost:4200").AllowAnyHeader());
+                // options.AddPolicy("AllowHeaders", configurePolicy => configurePolicy.AllowAnyHeader());
+            });
             services.AddControllers();
         }
 
@@ -39,6 +45,9 @@ namespace freeEnergyResortAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowOrigin");
+            // app.UseCors("AllowHeaders");
 
             app.UseAuthorization();
 

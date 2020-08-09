@@ -7,9 +7,7 @@ namespace freeEnergyResortAPI.Models
         public int IdProduccionEnergia { get; set; }
         public int IdFuenteEnergia { get; set; }
         public FuenteEnergia FuenteEnergia { get; set; }
-        public int IdTableroDistribucion { get; set; }
-        public TableroDistribucion TableroDistribucion { get; set; }
+        public decimal Cantidad { get; set; }
         public DateTime Fecha { get; set; }
-        public decimal TotalEnergia { get; set; }
     }
 }
