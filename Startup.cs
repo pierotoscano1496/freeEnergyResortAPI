@@ -28,7 +28,7 @@ namespace freeEnergyResortAPI
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowOrigin", configurePolicy => configurePolicy.WithOrigins("http://localhost:4200").AllowAnyHeader());
+                options.AddPolicy("AllowOrigin", configurePolicy => configurePolicy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
                 // options.AddPolicy("AllowHeaders", configurePolicy => configurePolicy.AllowAnyHeader());
             });
             services.AddControllers();

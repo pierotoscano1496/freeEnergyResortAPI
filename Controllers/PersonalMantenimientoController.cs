@@ -42,11 +42,11 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpPut("{idPersonalMantenimiento}")]
-        public ActionResult SetPersonalMantenimientoOcupado(int idPersonalMantenimiento, PersonalMantenimiento personalMantenimiento)
+        public ActionResult SetPersonalMantenimientoCondicion(int idPersonalMantenimiento, PersonalMantenimiento personalMantenimiento)
         {
             try
             {
-                int records = context.SetPersonalMantenimientoOcupado(idPersonalMantenimiento, personalMantenimiento);
+                int records = context.SetPersonalMantenimientoCondicion(idPersonalMantenimiento, personalMantenimiento);
                 return new OkResult();
             }
             catch

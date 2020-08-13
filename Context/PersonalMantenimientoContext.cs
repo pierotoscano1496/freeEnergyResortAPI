@@ -54,7 +54,7 @@ namespace freeEnergyResortAPI.Context
             }
         }
 
-        public int SetPersonalMantenimientoOcupado(int idPersonalMantenimiento, PersonalMantenimiento personalMantenimiento)
+        public int SetPersonalMantenimientoCondicion(int idPersonalMantenimiento, PersonalMantenimiento personalMantenimiento)
         {
             using (MySqlConnection connection = GetConnection())
             {
