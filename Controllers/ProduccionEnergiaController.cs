@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using freeEnergyResortAPI.Context;
 using freeEnergyResortAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet("{fechaInicio}/{fechaFin}")]
+        [Authorize(Policy = "Gerente")]
         public ActionResult GetTotalesProduccionEnergiaInPeriod(DateTime fechaInicio, DateTime fechaFin)
         {
             if (fechaInicio < fechaFin)

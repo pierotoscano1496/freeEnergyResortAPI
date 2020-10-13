@@ -45,3 +45,11 @@ E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\System.Security.Cryptogr
 E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 E:\projects\freeEnergyResortAPI\obj\Debug\netcoreapp3.1\freeEnergyResortAPI.csproj.CopyComplete
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+E:\projects\freeEnergyResortAPI\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

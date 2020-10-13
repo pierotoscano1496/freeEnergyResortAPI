@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using freeEnergyResortAPI.Context;
 using freeEnergyResortAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet("{fechaInicio}/{fechaFin}")]
+        [Authorize(Policy = "Gerente")]
         public ActionResult GetConsumosEnergiaOfSectoresConsumoInPeriod(DateTime fechaInicio, DateTime fechaFin)
         {
             if (fechaInicio < fechaFin)

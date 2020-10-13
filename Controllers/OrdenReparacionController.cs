@@ -8,6 +8,7 @@ using freeEnergyResortAPI.Models;
 using freeEnergyResortAPI.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace freeEnergyResortAPI.Controllers
 {
@@ -26,6 +27,21 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
+        public ActionResult GetOrdenReparacion(int idOrdenReparacion)
+        {
+            try
+            {
+                OrdenReparacion ordenReparacion = context.GetOrdenReparacion(idOrdenReparacion);
+                return new OkObjectResult(ordenReparacion);
+            }
+            catch
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
         public ActionResult GetOrdenesReparacionPendientes()
         {
             try
@@ -40,6 +56,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetOrdenesReparacionPendientesForAmbientes()
         {
             try
@@ -54,6 +71,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetOrdenesReparacionPendientesForFuentesEnergia()
         {
             try
@@ -68,12 +86,14 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetOrdenReparacion(int idOrdenReparacion)
+        [Authorize(Policy = "PersonalMantenimiento")]
+        public ActionResult GetOrdenesReparacionByPersonalMantenimiento(int idPersonalMantenimiento, int estado)
         {
             try
             {
-                OrdenReparacion ordenReparacion = context.GetOrdenReparacion(idOrdenReparacion);
-                return new OkObjectResult(ordenReparacion);
+                List<OrdenReparacion> listOrdenesReparacion = context.GetOrdenesReparacionByPersonalMantenimiento(idPersonalMantenimiento, estado);
+
+                return new OkObjectResult(listOrdenesReparacion);
             }
             catch
             {
@@ -82,6 +102,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult AddOrdenReparacion(OrdenReparacion ordenReparacion)
         {
             try
@@ -97,6 +118,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult AddListOrdenesReparaciones(List<OrdenReparacion> listOrdenesReparacion)
         {
             try
@@ -104,6 +126,21 @@ namespace freeEnergyResortAPI.Controllers
                 int cantOrdenesReparacionesCreated = context.AddListOrdenesReparaciones(listOrdenesReparacion);
                 // return new CreatedAtActionResult("getAmbiente", "ambiente", new { idAmbiente = 1 }, new Ambiente());
                 return new OkObjectResult(new { createdItems = cantOrdenesReparacionesCreated });
+            }
+            catch
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut("{idOrdenReparacion}")]
+        [Authorize(Policy = "PersonalMantenimiento")]
+        public ActionResult SetOrdenReparacionEstado(int idOrdenReparacion, OrdenReparacion ordenReparacion)
+        {
+            try
+            {
+                int records = context.SetOrdenReparacionEstado(idOrdenReparacion, ordenReparacion);
+                return new OkResult();
             }
             catch
             {

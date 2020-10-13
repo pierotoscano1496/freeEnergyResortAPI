@@ -8,6 +8,7 @@ using freeEnergyResortAPI.Models;
 using freeEnergyResortAPI.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace freeEnergyResortAPI.Controllers
 {
@@ -24,6 +25,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetAllSectoresProduccion()
         {
             try
@@ -38,6 +40,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetAllSectoresProduccionDetails()
         {
             try
@@ -52,6 +55,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet("{idSectorProduccion}")]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetSectorProduccionDetails(int idSectorProduccion)
         {
             try
@@ -66,6 +70,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet("{fechaInicio}/{fechaFin}")]
+        [Authorize(Policy = "Gerente")]
         public ActionResult GetProduccionesEnergiaOfSectoresProduccionInPeriod(DateTime fechaInicio, DateTime fechaFin)
         {
             if (fechaInicio < fechaFin)

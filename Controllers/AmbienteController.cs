@@ -8,6 +8,7 @@ using freeEnergyResortAPI.Models;
 using freeEnergyResortAPI.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace freeEnergyResortAPI.Controllers
 {
@@ -25,6 +26,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetAllAmbientes()
         {
             try
@@ -39,6 +41,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetAllAmbientesDetails()
         {
             try

@@ -9,6 +9,7 @@ using freeEnergyResortAPI.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace freeEnergyResortAPI.Controllers
 {
@@ -28,6 +29,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult GetPersonalesMantenimientoDisponibles()
         {
             try
@@ -42,6 +44,7 @@ namespace freeEnergyResortAPI.Controllers
         }
 
         [HttpPut("{idPersonalMantenimiento}")]
+        [Authorize(Policy = "Supervisor")]
         public ActionResult SetPersonalMantenimientoCondicion(int idPersonalMantenimiento, PersonalMantenimiento personalMantenimiento)
         {
             try
