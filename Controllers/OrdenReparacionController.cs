@@ -85,7 +85,7 @@ namespace freeEnergyResortAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("{idPersonalMantenimiento}/{estado}")]
         [Authorize(Policy = "PersonalMantenimiento")]
         public ActionResult GetOrdenesReparacionByPersonalMantenimiento(int idPersonalMantenimiento, int estado)
         {

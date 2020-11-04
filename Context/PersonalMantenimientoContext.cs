@@ -30,7 +30,7 @@ namespace freeEnergyResortAPI.Context
                         {
                             PersonalMantenimiento personalMantenimiento = new PersonalMantenimiento
                             {
-                                IdPersonalMantenimiento = reader.GetInt32("id_personal_mantenimiento"),
+                                IdUsuario = reader.GetInt32("id_usuario"),
                                 CodPersonalMantenimiento = reader.GetString("cod_personal_mantenimiento"),
                                 Dni = reader.GetString("dni"),
                                 Nombres = reader.GetString("nombres"),

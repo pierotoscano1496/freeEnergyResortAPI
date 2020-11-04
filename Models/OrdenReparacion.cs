@@ -17,5 +17,7 @@ namespace freeEnergyResortAPI.Models
         public Usuario Usuario { get; set; }
         public DateTime Fecha { get; set; }
         public int Estado { get; set; }
+        public string InformeTecnico { get; set; }
+        public DateTime? FechaReparacion { get; set; }
     }
 }
