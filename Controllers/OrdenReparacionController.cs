@@ -135,11 +135,11 @@ namespace freeEnergyResortAPI.Controllers
 
         [HttpPut("{idOrdenReparacion}")]
         [Authorize(Policy = "PersonalMantenimiento")]
-        public ActionResult SetOrdenReparacionEstado(int idOrdenReparacion, OrdenReparacion ordenReparacion)
+        public ActionResult SetOrdenReparacionFinished(int idOrdenReparacion, OrdenReparacion ordenReparacion)
         {
             try
             {
-                int records = context.SetOrdenReparacionEstado(idOrdenReparacion, ordenReparacion);
+                int records = context.SetOrdenReparacionFinished(idOrdenReparacion, ordenReparacion);
                 return new OkResult();
             }
             catch

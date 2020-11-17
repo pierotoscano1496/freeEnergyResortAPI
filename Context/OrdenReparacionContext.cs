@@ -201,7 +201,7 @@ namespace freeEnergyResortAPI.Context
                 {
                     connection.Open();
 
-                    MySqlCommand command = new MySqlCommand(@"SELECT orden_reparacion.id_orden_reparacion, orden_reparacion.fecha, orden_reparacion.estado,
+                    MySqlCommand command = new MySqlCommand(@"SELECT orden_reparacion.id_orden_reparacion, orden_reparacion.id_personal_mantenimiento, orden_reparacion.fecha, orden_reparacion.estado, orden_reparacion.informe_tecnico, orden_reparacion.fecha_reparacion,
                     ambiente.id_ambiente, ambiente.cod_ambiente, ambiente.nombre AS nombre_ambiente,
                     circuito.id_circuito, circuito.cod_circuito, circuito.nombre AS nombre_circuito,
                     fuente_energia.id_fuente_energia, fuente_energia.cod_fuente_energia, fuente_energia.nombre AS nombre_fuente_energia, fuente_energia.tipo, fuente_energia.potencia, fuente_energia.id_sector_produccion,
@@ -225,8 +225,15 @@ namespace freeEnergyResortAPI.Context
                             {
                                 IdOrdenReparacion = reader.GetInt32("id_orden_reparacion"),
                                 Fecha = reader.GetDateTime("fecha"),
-                                Estado = reader.GetInt32("estado")
+                                Estado = reader.GetInt32("estado"),
+                                IdPersonalMantenimiento = reader.GetInt32("id_personal_mantenimiento")
                             };
+
+                            if (estado == 2)
+                            {
+                                ordenReparacion.InformeTecnico = reader.GetString("informe_tecnico");
+                                ordenReparacion.FechaReparacion = reader.GetDateTime("fecha_reparacion");
+                            }
 
                             if (reader.IsDBNull(reader.GetOrdinal("id_fuente_energia")))
                             {
@@ -347,7 +354,7 @@ namespace freeEnergyResortAPI.Context
             return createdItems;
         }
 
-        public int SetOrdenReparacionEstado(int idOrdenReparacion, OrdenReparacion ordenReparacion)
+        public int SetOrdenReparacionFinished(int idOrdenReparacion, OrdenReparacion ordenReparacion)
         {
             using (MySqlConnection connection = GetConnection())
             {
@@ -355,9 +362,13 @@ namespace freeEnergyResortAPI.Context
                 {
                     connection.Open();
 
-                    MySqlCommand command = new MySqlCommand(@"UPDATE orden_reparacion SET estado = @estado WHERE id_orden_reparacion = @idOrdenReparacion", connection);
+                    MySqlCommand command = new MySqlCommand(@"UPDATE orden_reparacion SET estado = @estado, informe_tecnico = @informeTecnico, fecha_reparacion = @fechaReparacion WHERE id_orden_reparacion = @idOrdenReparacion;
+                    UPDATE personal_mantenimiento SET condicion = 2 WHERE id_usuario = @idUsuario", connection);
                     command.Parameters.AddWithValue("@estado", ordenReparacion.Estado);
+                    command.Parameters.AddWithValue("@informeTecnico", ordenReparacion.InformeTecnico);
+                    command.Parameters.AddWithValue("@fechaReparacion", ordenReparacion.FechaReparacion);
                     command.Parameters.AddWithValue("@idOrdenReparacion", idOrdenReparacion);
+                    command.Parameters.AddWithValue("@idUsuario", ordenReparacion.IdPersonalMantenimiento);
 
                     return command.ExecuteNonQuery();
                 }
